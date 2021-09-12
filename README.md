@@ -1,1 +1,1 @@
-This is a Readme file.
+Understanding webpack fudamentals from Udemy course by `https://github.com/vp-online-courses/webpack-tutorial`
