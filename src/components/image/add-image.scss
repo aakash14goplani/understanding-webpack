@@ -1,0 +1,10 @@
+$width: 5rem;
+$height: 5rem;
+
+.img-responsive {
+  display: flex;
+  width: $width;
+  height: $height;
+  border: 1px solid cyan;
+  margin: 1rem;
+}

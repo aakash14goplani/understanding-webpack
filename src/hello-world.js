@@ -1,3 +1,5 @@
 function helloWorld() {
-    console.log('Hello world');
+    document.write('Hello world');
 }
+
+export default helloWorld;

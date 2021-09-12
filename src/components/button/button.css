@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+}
+
+.button-primary {
+  display: flex;
+  margin: 2rem;
+  justify-content: center;
+  background-color: chartreuse;
+  width: 50%;
+  padding: 2%;
+}
+
+.text-primary {
+  display: flex;
+  justify-content: center;
+  color: crimson;
+  font-weight: 500;
+}
+
+p {
+  margin: 1rem 0;
+}
