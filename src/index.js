@@ -1,4 +1,4 @@
-import helloWorld from './hello-world'
+import helloWorld from './components/heading/hello-world'
 import addImage from './components/image/add-image';
 import Button from './components/button/button';
 

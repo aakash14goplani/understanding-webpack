@@ -1,3 +1,15 @@
+.heading {
+  color: cornflowerblue;
+  text-decoration: underline;
+  font-style: italic;
+}
+.img-responsive {
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid cyan;
+  margin: 1rem; }
+
 body {
   display: flex;
   flex-direction: column;
