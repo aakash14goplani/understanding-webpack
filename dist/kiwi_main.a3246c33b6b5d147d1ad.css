@@ -1,0 +1,12 @@
+.heading {
+  color: cornflowerblue;
+  text-decoration: underline;
+  font-style: italic;
+}
+body{display:flex;flex-direction:column;align-items:center;margin:1rem;padding:1rem;font-size:1.6rem}body .kiwi-img-responsive{display:flex;width:5rem;height:5rem;border:1px solid cyan;margin:1rem}
+
+.link {
+  padding: 2rem;
+  text-decoration: none;
+  color: cornflowerblue;
+}
