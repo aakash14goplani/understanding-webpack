@@ -3,9 +3,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index_main: './src/index.js',
+    kiwi_main: './src/kiwi.index.js'
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, './dist'),
     publicPath: ''
   },
@@ -61,7 +64,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Understanding Webpack Basics',
       description: 'html-webpack-plugin',
-      template: 'src/index.hbs'
+      template: 'src/index.hbs',
+      chunks: ['index_main'],
+      filename: 'index.main.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Kiwi Fruit',
+      description: 'html-webpack-plugin',
+      template: 'src/kiwi.hbs',
+      chunks: ['kiwi_main'],
+      filename: 'kiwi.html'
     })
   ]
 };

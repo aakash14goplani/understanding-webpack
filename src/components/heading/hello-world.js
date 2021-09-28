@@ -1,10 +1,10 @@
 import './hello-world.css';
 
-function helloWorld() {
+function helloWorld(title) {
 	const heading = document.createElement('h1');
   const body = document.querySelector('body');
   
-	heading.innerHTML = 'Understanding Webpack Basics';
+	heading.innerHTML = 'Understanding Basics of ' + title;
   heading.classList.add('heading');
   body.appendChild(heading);
 }

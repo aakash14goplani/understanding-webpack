@@ -4,14 +4,24 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index_main: './src/index.js',
+    kiwi_main: './src/kiwi.index.js'
+  },
   output: {
-    filename: 'main.[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist'),
     publicPath: ''
   },
   mode: 'production',
   watch: true,
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 10000,
+      automaticNameDelimiter: '_'
+    }
+  },
   module: {
     rules: [
       {
@@ -53,13 +63,22 @@ module.exports = {
   },
   plugins: [
     new MinicssExtractPlugin({
-      filename: 'style.[contenthash].css'
+      filename: '[name].[contenthash].css'
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Understanding Webpack Basics',
       description: 'html-webpack-plugin',
-      template: 'src/index.hbs'
+      template: 'src/index.hbs',
+      chunks: ['index_main', 'vendors~index_main~kiwi_main'],
+      filename: 'index.main.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Kiwi Fruit',
+      description: 'html-webpack-plugin',
+      template: 'src/kiwi.hbs',
+      chunks: ['kiwi_main', 'vendors~index_main~kiwi_main'],
+      filename: 'kiwi.html'
     })
   ]
 };
