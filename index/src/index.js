@@ -10,5 +10,5 @@ helloWorld(_.upperFirst('webpack'));
 const button = new Button();
 button.render();
 const redirect = new Redirect();
-redirect.redirectToPage('kiwi');
+redirect.redirectToPage('http://localhost:9001/');
 addImage();

@@ -1,24 +1,24 @@
 const path = require('path');
+const MinicssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
-  entry: {
-    index_main: './src/index.js',
-    kiwi_main: './src/kiwi.index.js'
-  },
+  entry: './src/kiwi.index.js',
   output: {
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist'),
-    publicPath: ''
+    publicPath: 'http://localhost:9001/'
   },
-  mode: 'development',
-  watch: false,
-  devServer: {
-    static: path.resolve(__dirname, './dist'),
-    port: 9000,
-    historyApiFallback: true,
-    hot: true
+  mode: 'production',
+  watch: true,
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 10000,
+      automaticNameDelimiter: '_'
+    }
   },
   module: {
     rules: [
@@ -31,13 +31,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader', 'css-loader'
+          MinicssExtractPlugin.loader, 'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          'style-loader', 'css-loader', 'sass-loader'
+          MinicssExtractPlugin.loader, 'css-loader', 'sass-loader'
         ]
       },
       {
@@ -60,20 +60,25 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'Understanding Webpack Basics',
-      description: 'html-webpack-plugin',
-      template: 'src/index.hbs',
-      chunks: ['index_main'],
-      filename: 'index.main.html'
+    new MinicssExtractPlugin({
+      filename: '[name].[contenthash].css'
     }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Kiwi Fruit',
       description: 'html-webpack-plugin',
       template: 'src/kiwi.hbs',
-      chunks: ['kiwi_main'],
       filename: 'kiwi.html'
+    }),
+    new ModuleFederationPlugin({
+      name: 'KiwiApp',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './KiwiPage': './src/components/kiwi-page/kiwi-page.js'
+      }
+      /* remotes: {
+        IndexApp: 'IndexApp@http://localhost:9000/remoteEntry.js'
+      } */
     })
   ]
 };

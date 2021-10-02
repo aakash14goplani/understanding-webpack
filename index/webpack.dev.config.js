@@ -1,25 +1,25 @@
 const path = require('path');
-const MinicssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
-  entry: {
-    index_main: './src/index.js',
-    kiwi_main: './src/kiwi.index.js'
-  },
+  entry: './src/index.js',
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/static/'
+    publicPath: 'http://localhost:9000/'
   },
-  mode: 'production',
-  watch: true,
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 10000,
-      automaticNameDelimiter: '_'
+  mode: 'development',
+  watch: false,
+  devServer: {
+    static: path.resolve(__dirname, './dist'),
+    port: 9000,
+    historyApiFallback: true,
+    hot: true,
+    devMiddleware: {
+      index: 'index.main.html',
+      writeToDisk: true
     }
   },
   module: {
@@ -33,13 +33,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MinicssExtractPlugin.loader, 'css-loader'
+          'style-loader', 'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          MinicssExtractPlugin.loader, 'css-loader', 'sass-loader'
+          'style-loader', 'css-loader', 'sass-loader'
         ]
       },
       {
@@ -62,23 +62,20 @@ module.exports = {
     ]
   },
   plugins: [
-    new MinicssExtractPlugin({
-      filename: '[name].[contenthash].css'
-    }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Understanding Webpack Basics',
       description: 'html-webpack-plugin',
       template: 'src/index.hbs',
-      chunks: ['index_main', 'vendors~index_main~kiwi_main'],
       filename: 'index.main.html'
     }),
-    new HtmlWebpackPlugin({
-      title: 'Kiwi Fruit',
-      description: 'html-webpack-plugin',
-      template: 'src/kiwi.hbs',
-      chunks: ['kiwi_main', 'vendors~index_main~kiwi_main'],
-      filename: 'kiwi.html'
+    new ModuleFederationPlugin({
+      name: 'IndexApp',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Button': './src/components/button/button.js',
+        './IndexPage': './src/components/index-page-component/index-page-component.js'
+      }
     })
   ]
 };

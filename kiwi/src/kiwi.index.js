@@ -8,5 +8,11 @@ import React from 'react';
 helloWorld(_.upperFirst('kiwi'));
 const kiwiImage = new KiwiImage();
 const redirect = new Redirect();
-redirect.redirectToPage('index');
+redirect.redirectToPage('http://localhost:9000/');
 kiwiImage.render();
+
+import('IndexApp/Button').then(module => {
+  const buttonFromModule = module.default;
+  const button = new buttonFromModule();
+  button.render();
+});
