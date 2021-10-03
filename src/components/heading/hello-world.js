@@ -1,12 +1,13 @@
 import './hello-world.css';
+import $ from 'jquery';
 
 function helloWorld() {
-	const heading = document.createElement('h1');
-  const body = document.querySelector('body');
+	const heading = $('<h1>');
+  const body = $('body');
   
-	heading.innerHTML = 'Understanding Webpack Basics';
-  heading.classList.add('heading');
-  body.appendChild(heading);
+	heading.text('Understanding Webpack Basics');
+  heading.addClass('heading');
+  body.append(heading);
 }
 
 export default helloWorld;

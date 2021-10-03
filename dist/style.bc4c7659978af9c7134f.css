@@ -1,0 +1,38 @@
+.heading {
+  color: cornflowerblue;
+  text-decoration: underline;
+  font-style: italic;
+}
+.img-responsive{display:flex;width:5rem;height:5rem;border:1px solid cyan;margin:1rem}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+}
+
+.button-primary {
+  display: flex;
+  margin: 2rem;
+  justify-content: center;
+  background-color: chartreuse;
+  width: 50%;
+  padding: 2%;
+  cursor: pointer;
+}
+
+.text-primary {
+  display: flex;
+  justify-content: center;
+  color: crimson;
+  font-weight: 500;
+}
+
+p {
+  margin: 1rem 0;
+}
+@font-face{font-family:'Open Sans';font-weight:300;src:url(0ee53b6e4b45c7a90cb8.woff2) format("woff2"),url(eda37367d579afeef296.woff) format("woff"),url(9bf24b3f5e084c3c6ee2.ttf) format("truetype")}@font-face{font-family:'Open Sans';font-weight:400;src:url(de4b1d6dd75fe0dd7a43.woff2) format("woff2"),url(1359e683dc235505a6b3.woff) format("woff"),url(8cf2292f33fb607f110c.ttf) format("truetype")}@font-face{font-family:'Open Sans';font-weight:600;src:url(73ee968d76cc0a6b586f.woff2) format("woff2"),url(57565f1d53a7b35f45ea.woff) format("woff"),url(6dfd0846d17e2448091c.ttf) format("truetype")}html body{font-family:'Open Sans', Arial, sans-serif;font-weight:300}
+
