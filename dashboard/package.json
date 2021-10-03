@@ -3,7 +3,7 @@
   "name": "webpack_tutorial",
   "author": "Aakash Goplani",
   "license": "ISC",
-  "main": "index.js",
+  "main": "dashboard.js",
   "scripts": {
     "build": "webpack --config webpack.prod.config.js",
     "build-dev": "webpack serve --config webpack.dev.config.js",
